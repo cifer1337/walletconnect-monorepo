@@ -86,7 +86,7 @@ async function onDisconnect() {
   textEl.innerHTML = "Disconnected!";
 
   const buttonEl = containerEl.getElementsByTagName("button")[0];
-  buttonEl.innerText = "WalletConnect";
+  buttonEl.innerText = "Connect";
   buttonEl.onclick = onInit;
   if (pTags.length > 1) {
     const accountEl = containerEl.getElementsByTagName("p")[1];
@@ -127,12 +127,11 @@ function signPersonalMessage() {
     throw new Error(`connector hasn't been created yet`);
   }
 
-  const msg =
-    "0x224d7920656d61696c206973206a6f686e40646f652e636f6d202d203135333738333632303631303122";
+  const msg = "Test message from WalletConnect example";
 
   // Send transaction
   connector
-    .signPersonalMessage(msg)
+    .signPersonalMessage([msg, connector.accounts[0]])
     .then(result => {
       // Returns transaction id (hash)
       console.log(result); // eslint-disable-line
