@@ -22,6 +22,7 @@ function onInit() {
     connector.createSession().then(() => {
       // get uri for QR Code modal
       const uri = connector.uri;
+      console.log(uri); // eslint-disable-line
       // display QR Code modal
       WalletConnectQRCodeModal.open(uri, () => {
         console.log("QR Code Modal closed"); // eslint-disable-line
