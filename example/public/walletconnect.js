@@ -97,21 +97,42 @@ async function onDisconnect() {
   }
 }
 
-function sendTestTransaction() {
+// function sendTestTransaction() {
+//   if (!connector) {
+//     throw new Error(`connector hasn't been created yet`);
+//   }
+
+//   // Draft transaction
+//   const tx = {
+//     from: connector.accounts[0],
+//     to: connector.accounts[0],
+//     data: "0x", // Required
+//   };
+
+//   // Send transaction
+//   connector
+//     .sendTransaction(tx)
+//     .then(result => {
+//       // Returns transaction id (hash)
+//       console.log(result); // eslint-disable-line
+//     })
+//     .catch(error => {
+//       // Error returned when rejected
+//       console.error(error); // eslint-disable-line
+//     });
+// }
+
+function signPersonalMessage() {
   if (!connector) {
     throw new Error(`connector hasn't been created yet`);
   }
 
-  // Draft transaction
-  const tx = {
-    from: connector.accounts[0],
-    to: connector.accounts[0],
-    data: "0x", // Required
-  };
+  const msg =
+    "0x224d7920656d61696c206973206a6f686e40646f652e636f6d202d203135333738333632303631303122";
 
   // Send transaction
   connector
-    .sendTransaction(tx)
+    .signPersonalMessage(msg)
     .then(result => {
       // Returns transaction id (hash)
       console.log(result); // eslint-disable-line
@@ -140,8 +161,8 @@ async function updateSessionDetails({ accounts, chainId }) {
     window.insertAfter(chainEl, accountEl);
 
     const buttonEl = containerEl.getElementsByTagName("button")[0];
-    buttonEl.innerText = "Send Transaction";
-    buttonEl.onclick = sendTestTransaction;
+    buttonEl.innerText = "Sign Message";
+    buttonEl.onclick = signPersonalMessage;
   } else {
     const accountEl = containerEl.getElementsByTagName("p")[1];
     accountEl.innerHTML = `Account: ${accounts[0]}`;
