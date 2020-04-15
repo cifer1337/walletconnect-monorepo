@@ -18,8 +18,8 @@ import {
 
 export async function generateKey(length?: number): Promise<ArrayBuffer> {
   const _length = (length || 256) / 8;
-  const buffer: Buffer = eccryptoJS.randomBytes(_length);
-  const result = convertBufferToArrayBuffer(buffer);
+  const buf: Buffer = eccryptoJS.randomBytes(_length);
+  const result = convertBufferToArrayBuffer(buf);
 
   return result;
 }
@@ -84,8 +84,8 @@ export async function decrypt(
 
   const cipherText: Buffer = convertHexToBuffer(payload.data);
   const iv: Buffer = convertHexToBuffer(payload.iv);
-  const buffer: Buffer = await eccryptoJS.aesCbcDecrypt(cipherText, _key, iv);
-  const utf8: string = convertBufferToUtf8(buffer);
+  const buf: Buffer = await eccryptoJS.aesCbcDecrypt(cipherText, _key, iv);
+  const utf8: string = convertBufferToUtf8(buf);
   let data: IJsonRpcRequest;
   try {
     data = JSON.parse(utf8);

@@ -19,12 +19,12 @@ const AES_LENGTH = 256;
 const HMAC_ALGORITHM = "SHA-256";
 
 export async function exportKey(cryptoKey: CryptoKey): Promise<ArrayBuffer> {
-  const buffer: ArrayBuffer = await window.crypto.subtle.exportKey("raw", cryptoKey);
-  return buffer;
+  const arrBuf: ArrayBuffer = await window.crypto.subtle.exportKey("raw", cryptoKey);
+  return arrBuf;
 }
 
 export async function importKey(
-  buffer: ArrayBuffer,
+  arrBuf: ArrayBuffer,
   type: string = AES_ALGORITHM,
 ): Promise<CryptoKey> {
   const aesParams: AesKeyAlgorithm = { length: AES_LENGTH, name: AES_ALGORITHM };
@@ -35,7 +35,7 @@ export async function importKey(
   const algoParams: AesKeyAlgorithm | HmacImportParams =
     type === AES_ALGORITHM ? aesParams : hmacParams;
   const usages: string[] = type === AES_ALGORITHM ? ["encrypt", "decrypt"] : ["sign", "verify"];
-  const cryptoKey = await window.crypto.subtle.importKey("raw", buffer, algoParams, true, usages);
+  const cryptoKey = await window.crypto.subtle.importKey("raw", arrBuf, algoParams, true, usages);
   return cryptoKey;
 }
 
@@ -160,8 +160,8 @@ export async function decrypt(
 
   const cipherText: ArrayBuffer = convertHexToArrayBuffer(payload.data);
   const iv: ArrayBuffer = convertHexToArrayBuffer(payload.iv);
-  const buffer: ArrayBuffer = await aesCbcDecrypt(cipherText, key, iv);
-  const utf8: string = convertArrayBufferToUtf8(buffer);
+  const arrBuf: ArrayBuffer = await aesCbcDecrypt(cipherText, key, iv);
+  const utf8: string = convertArrayBufferToUtf8(arrBuf);
   let data: IJsonRpcRequest;
   try {
     data = JSON.parse(utf8);

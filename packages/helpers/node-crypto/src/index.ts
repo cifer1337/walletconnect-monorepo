@@ -32,8 +32,8 @@ export function randomBytes(length: number): Promise<Buffer> {
 
 export async function generateKey(length?: number): Promise<ArrayBuffer> {
   const _length = (length || 256) / 8;
-  const buffer: Buffer = await randomBytes(_length);
-  const hex = convertBufferToHex(buffer, true);
+  const buf: Buffer = await randomBytes(_length);
+  const hex = convertBufferToHex(buf, true);
   const result = convertHexToArrayBuffer(hex);
 
   return result;
@@ -120,8 +120,8 @@ export async function decrypt(
 
   const cipherText: Buffer = convertHexToBuffer(payload.data);
   const iv: Buffer = convertHexToBuffer(payload.iv);
-  const buffer: Buffer = await aesCbcDecrypt(cipherText, _key, iv);
-  const utf8: string = convertBufferToUtf8(buffer);
+  const buf: Buffer = await aesCbcDecrypt(cipherText, _key, iv);
+  const utf8: string = convertBufferToUtf8(buf);
   let data: IJsonRpcRequest;
   try {
     data = JSON.parse(utf8);

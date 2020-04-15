@@ -5,16 +5,16 @@ Utility Library for WalletConnect
 ## API
 
 ```typescript
-function convertArrayBufferToBuffer (arrayBuffer: ArrayBuffer): Buffer
-function convertArrayBufferToUtf8 (arrayBuffer: ArrayBuffer): string
-function convertArrayBufferToHex (arrayBuffer: ArrayBuffer, noPrefix?: boolean): string
-function convertArrayBufferToNumber (arrayBuffer: ArrayBuffer): number
+function convertArrayBufferToBuffer (arrBuf: ArrayBuffer): Buffer
+function convertArrayBufferToUtf8 (arrBuf: ArrayBuffer): string
+function convertArrayBufferToHex (arrBuf: ArrayBuffer, noPrefix?: boolean): string
+function convertArrayBufferToNumber (arrBuf: ArrayBuffer): number
 function concatArrayBuffers (...args: ArrayBuffer[]): ArrayBuffer
 
-function convertBufferToArrayBuffer (buffer: Buffer): ArrayBuffer
-function convertBufferToUtf8 (buffer: Buffer): string
-function convertBufferToHex (buffer: Buffer, noPrefix?: boolean): string
-function convertBufferToNumber (buffer: Buffer): number
+function convertBufferToArrayBuffer (buf: Buffer): ArrayBuffer
+function convertBufferToUtf8 (buf: Buffer): string
+function convertBufferToHex (buf: Buffer, noPrefix?: boolean): string
+function convertBufferToNumber (buf: Buffer): number
 function concatBuffers (...args: Buffer[]): Buffer
 
 function convertUtf8ToArrayBuffer (utf8: string): ArrayBuffer
